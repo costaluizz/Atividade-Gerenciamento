@@ -16,6 +16,12 @@ class Tarefa (ABC):
         self.descricao = descricao
         self.status = status
     
+    def listar_tarefas(self):
+        pass
+
+    def listar_tarefas_pendentes(self):
+        pass
+    
     
 
 class Usuario():
@@ -24,18 +30,62 @@ class Usuario():
         self.nome = nome
         self.email = email
 
-    def cadastro_usuario(self,nome,email):
-        if len(nome) <= 15 and "@"  in email :
-            print("Cadastro realizado com sucesso")
+   
+class Sistema:
+    def __init__(self):
+        self.lista_usuarios = []
+        self.usuario_logado = None
+
+    def cadastrar_usuario(self):
+        nome = input("Nome Usuario(max:15caracteres): ")
+        email = input("Email do Usuario:  ")
+        senha = input("Crie uma senha:  \n ")
+
+        if "@" not in email:
+            print("E-MAIL inválido")
+            
+        if len(senha) < 4:
+            print("Senha muito curta \n")
         else:
-            print("Cadastro não realizado")
+            novo_usuario = Usuario(nome,email)
+            self.lista_usuarios.append(novo_usuario)
+            print("Usuario Cadastrado com Sucesso")
+
+    def login(self):
+        email = input("Entre com o email:  ")
+        senha = input("Entre com a senha:  ")
+
+        for usuario in self.lista_usuarios:
+            if (usuario.email == email) and (usuario.senha == senha):
+               self.usuario_logado = usuario
+               print(f"Usuário logado: {self.usuario_logado.nome}")
+               return
+        
+        print("Usuário inexistente ou senha invalida")
+    
+    def menu_principal(self):
+        opcao_escolhida = ""
+        while opcao_escolhida != "0":
+
+            print("Bem Vindo!Escolha uma opção: \n")
+            print("1. Cadastrar novo usuario")
+            print("2.Fazer Login")
+            print("0.Sair \n")
+            opcao_escolhida = input("Escolha: \n")
+
+            if opcao_escolhida == "1":
+                self.cadastrar_usuario()
+            elif opcao_escolhida == "2":
+                self.login()
+            elif opcao_escolhida == "0":
+                print("Saindo...")
+            else:
+                print("Opção Invalida")
+
+
+teste = Sistema()
+teste.menu_principal()
+
         
         
-print("-----Cadastro Usuario-----")
-nome = str(input("Nome Usuario(max:15caracteres):  "))
-email = str(input("Email do Usuario:  "))
-
-usuario_teste = Usuario(nome,email)
-usuario_teste.cadastro_usuario(nome,email)
-
-class Sistema_de_Tarefas
+    
