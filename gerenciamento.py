@@ -86,7 +86,6 @@ class Sistema:
         email = input("Entre com o email:  ")
         senha = input("Entre com a senha:  ")
 
-
         for usuario in self.lista_usuarios:
             if (usuario.email == email) and (usuario.senha == senha):
                self.usuario_logado = usuario
@@ -100,13 +99,11 @@ class Sistema:
         opcao_escolhida = ""
         while opcao_escolhida != "0":
 
-
             print("Bem Vindo!Escolha uma opção: \n")
             print("1. Cadastrar novo usuario")
             print("2.Fazer Login")
             print("0.Sair \n")
             opcao_escolhida = input("Escolha: \n")
-
 
             if opcao_escolhida == "1":
                 self.cadastrar_usuario()
